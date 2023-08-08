@@ -1,10 +1,10 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Header from './component/Header';
-import Rockets from './component/Rockets';
-import Missions from './component/Missions';
-import Dragons from './component/Dragons';
-import Profile from './component/Profile';
+import Header from './components/Header';
+import Rockets from './components/Rockets';
+import Missions from './components/Missions';
+import Dragons from './components/Dragons';
+import Profile from './components/Profile';
 
 function App() {
   return (
