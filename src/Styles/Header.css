@@ -40,3 +40,8 @@
 .navImg {
   width: 75px;
 }
+
+.active {
+  text-decoration: underline;
+  text-decoration-color: #0290ff;
+}
