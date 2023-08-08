@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import '../Styles/Missions.css';
 
 const Mission = () => {
-  const missions = useSelector((state) => state.missions);
+  const missions = useSelector((state) => state.mission.dummyMissions);
 
   return (
     <section className="missionsPage">
