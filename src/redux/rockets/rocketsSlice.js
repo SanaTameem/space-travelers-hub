@@ -15,8 +15,11 @@ export const fetchRockets = createAsyncThunk('rocket/fetchRockets', async () => 
     type: rocket.type,
     flickr_images: rocket.flickr_images[0],
     description: rocket.description,
+    reserved: false,
   }));
 });
+
+export const reserveRocket = createAsyncThunk('rocket/reserveRocket', (id) => id);
 
 const rocketSlice = createSlice({
   name: 'rocket',
@@ -29,10 +32,19 @@ const rocketSlice = createSlice({
     builder.addCase(fetchRockets.fulfilled, (state, action) => {
       state.isLoading = false;
       state.rocketsData = action.payload;
+      state.error = '';
     });
     builder.addCase(fetchRockets.rejected, (state, action) => {
       state.isLoading = false;
+      state.rocketsData = [];
       state.error = action.error.message;
+    });
+    builder.addCase(reserveRocket.fulfilled, (state, action) => {
+      state.isLoading = false;
+      const id = action.payload;
+      const newState = state.rocketsData.map((rocket) => (
+        rocket.id === id ? { ...rocket, reserved: true } : rocket));
+      state.rocketsData = newState;
     });
   },
 });
