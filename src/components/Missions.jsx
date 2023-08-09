@@ -49,19 +49,6 @@ const Mission = () => {
             </div>
           ))}
         </div>
-
-        <div className="column">
-          <h3>Status</h3>
-          {missions.length > 0 ? (
-            missions.map((mission) => (
-              <div key={mission.id} className="cell">
-                {mission.status}
-              </div>
-            ))
-          ) : (
-            <div>No status available</div>
-          )}
-        </div>
       </div>
     </section>
   );
