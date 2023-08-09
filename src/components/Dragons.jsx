@@ -21,7 +21,7 @@ function Dragons() {
           <div className="dragon-data">
             <h2 className="dragon-title">{dragon.name}</h2>
             <p className="dragon-info">
-              <span className="reserved-span">Reserved</span>
+              {/* <span className="reserved-span">Reserved</span> */}
               {dragon.description}
             </p>
             <button type="button" className="reserve-btn">Reserve Dragon</button>
