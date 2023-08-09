@@ -1,47 +1,18 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchMissions } from '../redux/missions/missionsSlice';
 import '../Styles/Missions.css';
 
 const Mission = () => {
-  const missions = useSelector((state) => state.mission.dummyMissions);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMissions());
+  }, [dispatch]);
 
   return (
     <section className="missionsPage">
-      <div className="missionTable">
-        <div className="column">
-          <h3>Missions</h3>
-          {missions.map((mission) => (
-            <div key={mission.id} className="cell">
-              {mission.mission_name}
-            </div>
-          ))}
-        </div>
-        <div className="column">
-          <h3>Descriptions</h3>
-          {missions.map((mission) => (
-            <div key={mission.id} className="cell">
-              {mission.description}
-            </div>
-          ))}
-        </div>
-        <div className="column">
-          <h3>Status</h3>
-
-          {missions.map((mission) => (
-            <div key={mission.id} className="cell">
-              {mission.status}
-            </div>
-          ))}
-        </div>
-        <div className="column">
-          <h3>Status</h3>
-          {missions.map((mission) => (
-            <div key={mission.id} className="cell">
-              {mission.status}
-            </div>
-          ))}
-        </div>
-      </div>
+      <h1>Missions</h1>
     </section>
   );
 };
