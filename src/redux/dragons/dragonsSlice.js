@@ -1,28 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
-import logo from '../../Assets/planet (1).png';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
-  dragons: [
-    {
-      id: uuidv4(),
-      name: 'Dragon1',
-      type: 'rocket',
-      flickr_images: logo,
-    },
-    {
-      id: uuidv4(),
-      name: 'Dragon2',
-      type: 'raptor',
-      flickr_images: logo,
-    },
-  ],
+  dragonsData: [],
+  isLoading: false,
+  error: 'null',
 };
+
+export const fetchDragons = createAsyncThunk('dragon/fetchDragons', async () => {
+  const response = await axios.get('https://api.spacexdata.com/v4/dragons');
+  // console.log(response.data);
+  return response.data.map((dragon) => ({
+    id: dragon.id,
+    name: dragon.name,
+    type: dragon.type,
+    flickr_images: dragon.flickr_images,
+    description: dragon.description,
+  }));
+});
 
 const dragonsSlice = createSlice({
   name: 'dragon',
   initialState,
   reducers: {},
+  extraReducers: {
+    [fetchDragons.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchDragons.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dragonsData = action.payload;
+    },
+    [fetchDragons.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    },
+  },
 });
 
 export default dragonsSlice.reducer;
