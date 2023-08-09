@@ -1,34 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
-import logo from '../../Assets/planet (1).png';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
-  rockets: [
-    {
-      id: uuidv4(),
-      name: 'Falcon1',
-      type: 'rocket',
-      flickr_images: logo,
-    },
-    {
-      id: uuidv4(),
-      name: 'Falcon9',
-      type: 'raptor',
-      flickr_images: logo,
-    },
-    {
-      id: uuidv4(),
-      name: 'Falcon Heavy',
-      type: 'merlin',
-      flickr_images: logo,
-    },
-  ],
+  rocketsData: [],
+  isLoading: false,
+  error: null,
 };
+
+export const fetchRockets = createAsyncThunk('rocket/fetchRockets', async () => {
+  const response = await axios.get('https://api.spacexdata.com/v4/rockets');
+  return response.data.map((rocket) => ({
+    id: rocket.id,
+    name: rocket.name,
+    type: rocket.type,
+    flickr_images: rocket.flickr_images[0],
+    description: rocket.description,
+  }));
+});
 
 const rocketSlice = createSlice({
   name: 'rocket',
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchRockets.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchRockets.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.rocketsData = action.payload;
+    });
+    builder.addCase(fetchRockets.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+  },
 });
 
 export default rocketSlice.reducer;
