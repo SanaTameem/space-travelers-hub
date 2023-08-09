@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchMissions } from '../redux/missions/missionsSlice';
 import '../Styles/Missions.css';
 
 const Mission = () => {
+  const missions = useSelector((state) => state.mission.missions);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,7 +14,42 @@ const Mission = () => {
 
   return (
     <section className="missionsPage">
-      <h1>Missions</h1>
+      <div className="missionTable">
+        <div className="column">
+          <h3>Missions</h3>
+          {missions.length > 0 ? (
+            missions.map((mission) => (
+              <div key={mission.id} className="cell">
+                {mission.mission_name}
+              </div>
+            ))
+          ) : (
+            <div>No missions available</div>
+          )}
+        </div>
+
+        <div className="column">
+          <h3>Descriptions</h3>
+          {missions.length > 0 ? (
+            missions.map((mission) => (
+              <div key={mission.id} className="cell">
+                {mission.description}
+              </div>
+            ))
+          ) : (
+            <div>No descriptions available</div>
+          )}
+        </div>
+
+        <div className="column">
+          <h3>Status</h3>
+          {missions.map((mission) => (
+            <div key={mission.id} className="cell">
+              {mission.status}
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
