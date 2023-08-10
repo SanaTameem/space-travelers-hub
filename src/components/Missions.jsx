@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMissions } from '../redux/missions/missionsSlice';
+import { fetchMissions, joinMission } from '../redux/missions/missionsSlice';
 import '../Styles/Missions.css';
 
 const Mission = () => {
@@ -11,6 +11,10 @@ const Mission = () => {
   useEffect(() => {
     dispatch(fetchMissions());
   }, [dispatch]);
+
+  const handleJoinMission = (id) => {
+    dispatch(joinMission(id));
+  };
 
   return (
     <section className="missionsPage">
@@ -45,6 +49,12 @@ const Mission = () => {
           <h3>Status</h3>
           {missions.map((mission) => (
             <div key={mission.id} className="cell">
+              <button
+                type="submit"
+                onClick={() => handleJoinMission(mission.id)}
+              >
+                Join Mission
+              </button>
               {mission.status}
             </div>
           ))}
