@@ -16,8 +16,11 @@ export const fetchDragons = createAsyncThunk('dragon/fetchDragons', async () => 
     type: dragon.type,
     flickr_images: dragon.flickr_images,
     description: dragon.description,
+    reserved: false,
   }));
 });
+
+export const reserveDragon = createAsyncThunk('dragon/reserveDragon', (id) => id);
 
 const dragonsSlice = createSlice({
   name: 'dragon',
@@ -34,6 +37,17 @@ const dragonsSlice = createSlice({
     [fetchDragons.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
+    },
+    [reserveDragon.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const id = action.payload;
+      const newState = state.dragonsData.map((dragon) => {
+        if (dragon.id === id) {
+          return { ...dragon, reserved: true };
+        }
+        return dragon;
+      });
+      state.dragonsData = newState;
     },
   },
 });
