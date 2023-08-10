@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../Styles/Dragons.css';
-import { fetchDragons } from '../redux/dragons/dragonsSlice';
+import { fetchDragons, reserveDragon } from '../redux/dragons/dragonsSlice';
 
 function Dragons() {
   const dispatch = useDispatch();
@@ -10,6 +10,11 @@ function Dragons() {
   }, [dispatch]);
 
   const dragonsData = useSelector((state) => state.dragon.dragonsData);
+
+  // const isDragonReserved = (dragonId) => {
+  //   const dragon = dragonsData.find((dragon) => dragon.id === dragonId);
+  //   return dragon.reserved;
+  // };
 
   return (
     <div className="dragons-main-container">
@@ -24,7 +29,10 @@ function Dragons() {
               {/* <span className="reserved-span">Reserved</span> */}
               {dragon.description}
             </p>
-            <button type="button" className="reserve-btn">Reserve Dragon</button>
+            <button type="button" className="reserve-btn" onClick={() => dispatch(reserveDragon(dragon.id))}>
+              Reserve dragon
+              {/* {isDragonReserved(dragon.id) ? 'Reserved' : 'Reserve dragon'} */}
+            </button>
           </div>
         </div>
       ))}
