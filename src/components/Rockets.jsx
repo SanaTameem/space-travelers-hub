@@ -11,12 +11,6 @@ function Rockets() {
   }, [dispatch]);
 
   const rocketData = useSelector((state) => state.rocket.rocketsData);
-
-  // const isRocketReserved = (rocketId) => {
-  //   const rocket = rocketData.find((rocket) => rocket.id === rocketId);
-  //   return rocket.reserved;
-  // };
-
   return (
     <div className="rockets-main-container">
       {rocketData.map((rocket) => (
