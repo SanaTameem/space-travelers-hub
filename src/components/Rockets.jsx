@@ -5,12 +5,13 @@ import { fetchRockets, reserveRocket, cancelRocket } from '../redux/rockets/rock
 
 function Rockets() {
   const dispatch = useDispatch();
-
+  const rocketData = useSelector((state) => state.rocket.rocketsData);
   useEffect(() => {
-    dispatch(fetchRockets());
+    if (rocketData.length === 0) {
+      dispatch(fetchRockets());
+    }
   }, [dispatch]);
 
-  const rocketData = useSelector((state) => state.rocket.rocketsData);
   return (
     <div className="rockets-main-container">
       {rocketData.map((rocket) => (
