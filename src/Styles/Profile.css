@@ -12,11 +12,8 @@
 
 .profile {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
   justify-content: space-around;
-  height: 80vh;
-  width: 80vh;
+  width: 100%;
   border-radius: 5px;
 }
 
@@ -30,4 +27,36 @@
   width: 40vh;
   border-radius: 5px;
   margin: 1em;
+}
+
+.reserved-name {
+  font-size: 20px;
+}
+
+.cancel-btn {
+  width: 70%;
+  background: #e92e2e;
+  border: none;
+  border-radius: 4px;
+  padding: 3px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.read-more {
+  width: 92%;
+  background: rgb(81, 81, 226);
+  border: none;
+  border-radius: 4px;
+  padding: 3px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.rocket-row td {
+  padding-bottom: 20px;
+}
+
+.rockets-table {
+  margin-top: 20px;
 }
