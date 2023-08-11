@@ -17,6 +17,7 @@ export const fetchDragons = createAsyncThunk('dragon/fetchDragons', async () => 
     flickr_images: dragon.flickr_images,
     description: dragon.description,
     reserved: false,
+    wikipedia: dragon.wikipedia,
   }));
 });
 
