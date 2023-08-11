@@ -5,16 +5,14 @@ import { fetchDragons, reserveDragon, cancelDragon } from '../redux/dragons/drag
 
 function Dragons() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchDragons());
-  }, [dispatch]);
 
   const dragonsData = useSelector((state) => state.dragon.dragonsData);
 
-  // const isDragonReserved = (dragonId) => {
-  //   const dragon = dragonsData.find((dragon) => dragon.id === dragonId);
-  //   return dragon.reserved;
-  // };
+  useEffect(() => {
+    if (dragonsData.length === 0) {
+      dispatch(fetchDragons());
+    }
+  }, [dispatch]);
 
   return (
     <div className="dragons-main-container">
@@ -27,6 +25,9 @@ function Dragons() {
             <h2 className="dragon-title">{dragon.name}</h2>
             <p className="dragon-info">
               {/* <span className="reserved-span">Reserved</span> */}
+              {dragon.reserved && (
+                <span className="reserved-span">Reserved</span>
+              )}
               {dragon.description}
             </p>
             {!dragon.reserved ? (
@@ -43,7 +44,7 @@ function Dragons() {
                 className="reserve-btn"
                 onClick={() => dispatch(cancelDragon(dragon.id))}
               >
-                Reserve Dragon
+                Cancel Reservation
               </button>
             )}
           </div>
