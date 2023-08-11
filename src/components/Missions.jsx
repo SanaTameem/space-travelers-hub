@@ -9,25 +9,19 @@ import '../Styles/Missions.css';
 
 const Mission = () => {
   const missions = useSelector((state) => state.mission.missions);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchMissions());
   }, [dispatch]);
 
-  const handleJoinMission = (id) => {
-    dispatch(joinMission(id));
-  };
-
-  // const isMissionJoined = (missionId) => {
-  //   const mission = missions.find((mission) => mission.id === missionId);
-  //   return mission.reserved;
+  // const handleJoinMission = (id) => {
+  //   dispatch(joinMission(id));
   // };
 
-  const handleUnjoinMission = (id) => {
-    dispatch(unjoinMission(id));
-  };
+  // const handleUnjoinMission = (id) => {
+  //   dispatch(unjoinMission(id));
+  // };
 
   return (
     <section className="missionsPage">
@@ -58,37 +52,34 @@ const Mission = () => {
           )}
         </div>
 
-        {/* <div className="column">
+        <div className="column">
           <h3>Status</h3>
           {missions.map((mission) => (
-            <div key={mission.id} className="cell">
-              <button
-                type="submit"
-                onClick={() => handleJoinMission(mission.id)}
-              >
-
-                Join Mission
-              </button>
-              {mission.status}
+            <div key={mission.mission_id} className="cell">
+              {mission.reserved ? (
+                <span className="activeMemberBadge">Active Member</span>
+              ) : (
+                <span>NOT A MEMBER</span>
+              )}
             </div>
           ))}
-        </div> */}
+        </div>
 
         <div className="column">
           <h3>Actions</h3>
           {missions.map((mission) => (
-            <div key={mission.mission_id} className="cell">
+            <div key={mission.id} className="cell">
               {mission.reserved ? (
                 <button
                   type="submit"
-                  onClick={() => handleUnjoinMission(mission.mission_id)}
+                  onClick={() => dispatch(unjoinMission(mission.id))}
                 >
-                  Unjoin Mission
+                  Leave Mission
                 </button>
               ) : (
                 <button
                   type="submit"
-                  onClick={() => handleJoinMission(mission.mission_id)}
+                  onClick={() => dispatch(joinMission(mission.id))}
                 >
                   Join Mission
                 </button>
