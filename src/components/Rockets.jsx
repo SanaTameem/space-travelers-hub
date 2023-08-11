@@ -21,7 +21,9 @@ function Rockets() {
           <div className="rocket-data">
             <h2 className="rocket-title">{rocket.name}</h2>
             <p className="rocket-info">
-              {/* <span className="reserved-span">Reserved</span> */}
+              {rocket.reserved && (
+                <span className="reserved-span">Reserved</span>
+              )}
               {rocket.description}
             </p>
             {!rocket.reserved ? (
@@ -38,7 +40,7 @@ function Rockets() {
                 className="reserve-btn"
                 onClick={() => dispatch(cancelRocket(rocket.id))}
               >
-                Reserve Rocket
+                Cancel Reservation
               </button>
             )}
           </div>
