@@ -7,22 +7,40 @@ import { cancelDragon } from '../redux/dragons/dragonsSlice';
 function Profile() {
   const dispatch = useDispatch();
   const rocketData = useSelector((state) => state.rocket.rocketsData);
-  const reservedRockets = rocketData.filter((rocket) => rocket.reserved === true);
+  const reservedRockets = rocketData.filter(
+    (rocket) => rocket.reserved === true,
+  );
 
   const dragonData = useSelector((state) => state.dragon.dragonsData);
-  const reservedDragons = dragonData.filter((dragon) => dragon.reserved === true);
+  const reservedDragons = dragonData.filter(
+    (dragon) => dragon.reserved === true,
+  );
+
+  const missions = useSelector((state) => state.mission.missions);
+  const reservedMissions = missions.filter(
+    (mission) => mission.reserved === true,
+  );
 
   return (
     <div className="profile">
       <div className="profile">
-        {/* <div>
-            <h2>My Missions</h2>
-            <table>
-              <tbody>
-                <tr>Render Your Data here </tr>
-              </tbody>
-            </table>
-          </div> */}
+        <div>
+          <h2>My Missions</h2>
+          <table>
+            <tbody>
+              {reservedMissions.map((mission) => (
+                <tr key={mission.id}>
+                  <td>{mission.mission_name}</td>
+                  <td>
+                    Status:
+                    {' '}
+                    {mission.reserved ? 'Active Member' : 'NOT A MEMBER'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <div className="rockets-column">
           <h2>My Rockets</h2>
