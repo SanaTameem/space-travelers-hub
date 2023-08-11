@@ -24,7 +24,7 @@ export const fetchMissions = createAsyncThunk(
 
 export const joinMission = createAsyncThunk(
   'missions/joinMission',
-  (id, { getState }) => {
+  async (id, { getState }) => {
     const { missions } = getState().mission;
     const updatedMissions = missions.map((mission) => {
       if (mission.id === id) {
@@ -39,14 +39,31 @@ export const joinMission = createAsyncThunk(
 
 export const unjoinMission = createAsyncThunk(
   'missions/unjoinMission',
-  async (missionId, { getState }) => {
-    const { missions } = getState().missions;
-    const newState = missions.map((mission) => (mission.mission_id === missionId
-      ? { ...mission, reserved: false }
-      : mission));
-    return newState;
+  async (id, { getState }) => {
+    const { missions } = getState().mission;
+    const updatedMissions = missions.map((mission) => {
+      if (mission.id === id) {
+        return { ...mission, reserved: false };
+      }
+      return mission;
+    });
+
+    return updatedMissions;
   },
 );
+
+// export const unjoinMission = createAsyncThunk(
+//   "missions/unjoinMission",
+//   async (missionId, { getState }) => {
+//     const { missions } = getState().missions;
+//     const newState = missions.map((mission) =>
+//       mission.mission_id === missionId
+//         ? { ...mission, reserved: false }
+//         : mission
+//     );
+//     return newState;
+//   }
+// );
 
 const missionsSlice = createSlice({
   name: 'missions',
@@ -58,9 +75,11 @@ const missionsSlice = createSlice({
     builder.addCase(fetchMissions.fulfilled, (state, action) => {
       state.missions = action.payload;
     });
+
     builder.addCase(joinMission.fulfilled, (state, action) => {
       state.missions = action.payload;
     });
+
     builder.addCase(unjoinMission.fulfilled, (state, action) => {
       state.missions = action.payload;
     });
