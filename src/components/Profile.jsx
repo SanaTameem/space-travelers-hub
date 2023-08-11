@@ -2,11 +2,15 @@ import React from 'react';
 import '../Styles/Profile.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { cancelRocket } from '../redux/rockets/rocketsSlice';
+import { cancelDragon } from '../redux/dragons/dragonsSlice';
 
 function Profile() {
   const dispatch = useDispatch();
   const rocketData = useSelector((state) => state.rocket.rocketsData);
   const reservedRockets = rocketData.filter((rocket) => rocket.reserved === true);
+
+  const dragonData = useSelector((state) => state.dragon.dragonsData);
+  const reservedDragons = dragonData.filter((dragon) => dragon.reserved === true);
 
   return (
     <div className="profile">
@@ -52,14 +56,37 @@ function Profile() {
           </table>
         </div>
 
-        {/* <div>
-            <h2>My Dragons</h2>
-            <table>
-              <tbody>
-                <tr>Render Your Data here </tr>
-              </tbody>
-            </table>
-          </div> */}
+        <div>
+          <h2>My Dragons</h2>
+          {reservedDragons.length === 0 && <p>Reserve a dragon</p>}
+          <table className="dragons-table">
+            <tbody>
+              {reservedDragons.map((dragon) => (
+                <tr key={dragon.id} className="dragon-row">
+                  <td className="reserved-name">{dragon.name}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="cancel-btn"
+                      onClick={() => dispatch(cancelDragon(dragon.id))}
+                    >
+                      Cancel Reservation
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className="read-more"
+                      onClick={() => window.open(dragon.wikipedia)}
+                    >
+                      Read More
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
