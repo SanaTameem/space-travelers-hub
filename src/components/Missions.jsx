@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMissions, joinMission } from '../redux/missions/missionsSlice';
+import {
+  fetchMissions,
+  joinMission,
+  unjoinMission,
+} from '../redux/missions/missionsSlice';
 import '../Styles/Missions.css';
 
 const Mission = () => {
@@ -14,6 +18,15 @@ const Mission = () => {
 
   const handleJoinMission = (id) => {
     dispatch(joinMission(id));
+  };
+
+  // const isMissionJoined = (missionId) => {
+  //   const mission = missions.find((mission) => mission.id === missionId);
+  //   return mission.reserved;
+  // };
+
+  const handleUnjoinMission = (id) => {
+    dispatch(unjoinMission(id));
   };
 
   return (
@@ -45,7 +58,7 @@ const Mission = () => {
           )}
         </div>
 
-        <div className="column">
+        {/* <div className="column">
           <h3>Status</h3>
           {missions.map((mission) => (
             <div key={mission.id} className="cell">
@@ -53,9 +66,33 @@ const Mission = () => {
                 type="submit"
                 onClick={() => handleJoinMission(mission.id)}
               >
+
                 Join Mission
               </button>
               {mission.status}
+            </div>
+          ))}
+        </div> */}
+
+        <div className="column">
+          <h3>Actions</h3>
+          {missions.map((mission) => (
+            <div key={mission.mission_id} className="cell">
+              {mission.reserved ? (
+                <button
+                  type="submit"
+                  onClick={() => handleUnjoinMission(mission.mission_id)}
+                >
+                  Unjoin Mission
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  onClick={() => handleJoinMission(mission.mission_id)}
+                >
+                  Join Mission
+                </button>
+              )}
             </div>
           ))}
         </div>

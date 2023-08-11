@@ -8,11 +8,11 @@ export const fetchMissions = createAsyncThunk(
       const data = await response.json();
 
       const missions = data.map((mission) => ({
-        id: mission.mission_id, // Add 'id' field
+        id: mission.mission_id,
         mission_name: mission.mission_name,
         description: mission.description,
         status: mission.status,
-        reserved: false, // Add 'reserved' field
+        reserved: false,
       }));
 
       return missions;
@@ -37,6 +37,17 @@ export const joinMission = createAsyncThunk(
   },
 );
 
+export const unjoinMission = createAsyncThunk(
+  'missions/unjoinMission',
+  async (missionId, { getState }) => {
+    const { missions } = getState().missions;
+    const newState = missions.map((mission) => (mission.mission_id === missionId
+      ? { ...mission, reserved: false }
+      : mission));
+    return newState;
+  },
+);
+
 const missionsSlice = createSlice({
   name: 'missions',
   initialState: {
@@ -48,6 +59,9 @@ const missionsSlice = createSlice({
       state.missions = action.payload;
     });
     builder.addCase(joinMission.fulfilled, (state, action) => {
+      state.missions = action.payload;
+    });
+    builder.addCase(unjoinMission.fulfilled, (state, action) => {
       state.missions = action.payload;
     });
   },
