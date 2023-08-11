@@ -53,10 +53,12 @@
   font-weight: 700;
 }
 
-.rocket-row td {
+.rocket-row td,
+.dragon-row td {
   padding-bottom: 20px;
 }
 
-.rockets-table {
+.rockets-table,
+.dragons-table {
   margin-top: 20px;
 }
