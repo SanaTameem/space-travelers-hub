@@ -21,6 +21,7 @@ export const fetchDragons = createAsyncThunk('dragon/fetchDragons', async () => 
 });
 
 export const reserveDragon = createAsyncThunk('dragon/reserveDragon', (id) => id);
+export const cancelDragon = createAsyncThunk('dragon/cancelDragon', (id) => id);
 
 const dragonsSlice = createSlice({
   name: 'dragon',
@@ -44,6 +45,17 @@ const dragonsSlice = createSlice({
       const newState = state.dragonsData.map((dragon) => {
         if (dragon.id === id) {
           return { ...dragon, reserved: true };
+        }
+        return dragon;
+      });
+      state.dragonsData = newState;
+    },
+    [cancelDragon.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const id = action.payload;
+      const newState = state.dragonsData.map((dragon) => {
+        if (dragon.id === id) {
+          return { ...dragon, reserved: false };
         }
         return dragon;
       });
