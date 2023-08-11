@@ -1,16 +1,66 @@
 import React from 'react';
 import '../Styles/Profile.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { cancelRocket } from '../redux/rockets/rocketsSlice';
 
 function Profile() {
+  const dispatch = useDispatch();
+  const rocketData = useSelector((state) => state.rocket.rocketsData);
+  const reservedRockets = rocketData.filter((rocket) => rocket.reserved === true);
+
   return (
-    <div className="myprofile">
-      <section className="profile">
-        <h2>My Missions</h2>
+    <div className="profile">
+      <div className="profile">
+        {/* <div>
+            <h2>My Missions</h2>
+            <table>
+              <tbody>
+                <tr>Render Your Data here </tr>
+              </tbody>
+            </table>
+          </div> */}
 
-        <h2>My Rockets</h2>
+        <div className="rockets-column">
+          <h2>My Rockets</h2>
+          {reservedRockets.length === 0 && <p>Reserve a rocket</p>}
+          <table className="rockets-table">
+            <tbody>
+              {reservedRockets.map((rocket) => (
+                <tr key={rocket.id} className="rocket-row">
+                  <td className="reserved-name">{rocket.name}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="cancel-btn"
+                      onClick={() => dispatch(cancelRocket(rocket.id))}
+                    >
+                      Cancel Reservation
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className="read-more"
+                      onClick={() => window.open(rocket.readMore)}
+                    >
+                      Read More
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-        <h2>My Dragons</h2>
-      </section>
+        {/* <div>
+            <h2>My Dragons</h2>
+            <table>
+              <tbody>
+                <tr>Render Your Data here </tr>
+              </tbody>
+            </table>
+          </div> */}
+      </div>
     </div>
   );
 }
