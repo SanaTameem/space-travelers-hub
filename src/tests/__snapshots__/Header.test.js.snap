@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Heading routes are working correclty 1`] = `
+<a
+  activeclassname="active"
+  aria-current="page"
+  class="link active"
+  href="/"
+>
+  Rockets
+</a>
+`;
+
+exports[`Header Heading routes are working correclty 2`] = `
+<a
+  activeclassname="active"
+  class="link border"
+  href="/profile"
+>
+  My Profile
+</a>
+`;
