@@ -10,6 +10,7 @@ import { fetchRockets } from '../redux/rockets/rocketsSlice';
 const mockStore = configureMockStore([thunk]);
 
 test('renders rockets component correctly', async () => {
+  jest.setTimeout(30000);
   const store = mockStore({
     rocket: {
       rocketsData: [

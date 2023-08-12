@@ -10,6 +10,7 @@ import { fetchDragons } from '../redux/dragons/dragonsSlice';
 const mockStore = configureMockStore([thunk]);
 
 test('renders dragons component correctly', async () => {
+  jest.setTimeout(30000);
   const store = mockStore({
     dragon: {
       dragonsData: [

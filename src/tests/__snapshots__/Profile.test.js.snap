@@ -11,11 +11,18 @@ Object {
         <div
           class="profile"
         >
-          <div>
+          <div
+            class="missions-column"
+          >
             <h2>
               My Missions
             </h2>
-            <table>
+            <p>
+              Reserve a mission
+            </p>
+            <table
+              class="missions-table"
+            >
               <tbody />
             </table>
           </div>
@@ -58,11 +65,18 @@ Object {
       <div
         class="profile"
       >
-        <div>
+        <div
+          class="missions-column"
+        >
           <h2>
             My Missions
           </h2>
-          <table>
+          <p>
+            Reserve a mission
+          </p>
+          <table
+            class="missions-table"
+          >
             <tbody />
           </table>
         </div>
