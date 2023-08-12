@@ -1,0 +1,51 @@
+.rockets-main-container {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.rocket-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.rocket-img {
+  width: 300px;
+  height: 200px;
+}
+
+.rocket-data {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 0 28px;
+}
+
+.rocket-info {
+  text-align: left;
+}
+
+.reserve-btn {
+  padding: 8px 6px;
+  background-color: #0290ff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+.reserved-span {
+  background-color: #0290ff;
+  color: #fff;
+  margin-right: 5px;
+  padding: 0 2px;
+  border-radius: 3px;
+  font-size: 11px;
+}
