@@ -1,18 +1,20 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchMissions,
   joinMission,
   unjoinMission,
-} from "../redux/missions/missionsSlice";
-import "../Styles/Missions.css";
+} from '../redux/missions/missionsSlice';
+import '../Styles/Missions.css';
 
 const Mission = () => {
   const missions = useSelector((state) => state.mission.missions);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMissions());
+    if (missions.length === 0) {
+      dispatch(fetchMissions());
+    }
   }, [dispatch]);
 
   return (
@@ -47,7 +49,7 @@ const Mission = () => {
         <div className="column">
           <h3>Status</h3>
           {missions.map((mission) => (
-            <div key={mission.mission_id} className="cell">
+            <div key={mission.id} className="cell">
               {mission.reserved ? (
                 <span className="activeMemberBadge">Active Member</span>
               ) : (
