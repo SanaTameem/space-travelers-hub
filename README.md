@@ -65,7 +65,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link]()
+- [Live Demo Link](https://space-travelers-hub-x05d.onrender.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,7 +105,7 @@ To run tests, run the following command:
 
 ### Deployment
 
-I have deployed this project using: gh pages
+I have deployed this project using: render
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
