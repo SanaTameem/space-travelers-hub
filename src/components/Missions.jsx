@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMissions,
   joinMission,
   unjoinMission,
-} from '../redux/missions/missionsSlice';
-import '../Styles/Missions.css';
+} from "../redux/missions/missionsSlice";
+import "../Styles/Missions.css";
 
 const Mission = () => {
   const missions = useSelector((state) => state.mission.missions);
@@ -14,14 +14,6 @@ const Mission = () => {
   useEffect(() => {
     dispatch(fetchMissions());
   }, [dispatch]);
-
-  // const handleJoinMission = (id) => {
-  //   dispatch(joinMission(id));
-  // };
-
-  // const handleUnjoinMission = (id) => {
-  //   dispatch(unjoinMission(id));
-  // };
 
   return (
     <section className="missionsPage">
