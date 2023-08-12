@@ -12,16 +12,10 @@ const Mission = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMissions());
+    if (missions.length === 0) {
+      dispatch(fetchMissions());
+    }
   }, [dispatch]);
-
-  // const handleJoinMission = (id) => {
-  //   dispatch(joinMission(id));
-  // };
-
-  // const handleUnjoinMission = (id) => {
-  //   dispatch(unjoinMission(id));
-  // };
 
   return (
     <section className="missionsPage">
@@ -55,7 +49,7 @@ const Mission = () => {
         <div className="column">
           <h3>Status</h3>
           {missions.map((mission) => (
-            <div key={mission.mission_id} className="cell">
+            <div key={mission.id} className="cell">
               {mission.reserved ? (
                 <span className="activeMemberBadge">Active Member</span>
               ) : (
