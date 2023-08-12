@@ -23,6 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
+    "test:timeout": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\" --testTimeout=30000",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
