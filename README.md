@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <h1><b>Space Travelers' Hub</b></h1>
+  <h1><b>🚀🌌 Space Travelers' Hub 🌠🛰️</b></h1>
 
 </div>
 
@@ -173,6 +173,6 @@ I would like to thank [Microverse](https://www.microverse.org/go)
 
 ## 📝 License <a name="license"></a>
 
-This project is [MIT]() licensed.
+This project is [MIT](https://github.com/SanaTameem/space-travelers-hub/blob/feature/finalTouches/MIT.md) licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
