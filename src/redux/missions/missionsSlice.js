@@ -13,6 +13,7 @@ export const fetchMissions = createAsyncThunk(
         description: mission.description,
         status: mission.status,
         reserved: false,
+        wikipedia: mission.wikipedia,
       }));
 
       return missions;
@@ -51,19 +52,6 @@ export const unjoinMission = createAsyncThunk(
     return updatedMissions;
   },
 );
-
-// export const unjoinMission = createAsyncThunk(
-//   "missions/unjoinMission",
-//   async (missionId, { getState }) => {
-//     const { missions } = getState().missions;
-//     const newState = missions.map((mission) =>
-//       mission.mission_id === missionId
-//         ? { ...mission, reserved: false }
-//         : mission
-//     );
-//     return newState;
-//   }
-// );
 
 const missionsSlice = createSlice({
   name: 'missions',

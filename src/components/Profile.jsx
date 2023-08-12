@@ -3,6 +3,7 @@ import '../Styles/Profile.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { cancelRocket } from '../redux/rockets/rocketsSlice';
 import { cancelDragon } from '../redux/dragons/dragonsSlice';
+import { unjoinMission } from '../redux/missions/missionsSlice';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function Profile() {
   return (
     <div className="profile">
       <div className="profile">
-        <div>
+        {/* <div>
           <h2>My Missions</h2>
           <table>
             <tbody>
@@ -32,9 +33,40 @@ function Profile() {
                 <tr key={mission.id}>
                   <td>{mission.mission_name}</td>
                   <td>
-                    Status:
-                    {' '}
-                    {mission.reserved ? 'Active Member' : 'NOT A MEMBER'}
+                    Status:{" "}
+                    {mission.reserved ? "Active Member" : "NOT A MEMBER"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div> */}
+
+        <div className="missions-column">
+          <h2>My Missions</h2>
+          {reservedMissions.length === 0 && <p>Reserve a mission</p>}
+          <table className="missions-table">
+            <tbody>
+              {reservedMissions.map((mission) => (
+                <tr key={mission.id} className="rocket-row">
+                  <td className="mission-name">{mission.mission_name}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="cancel-btn"
+                      onClick={() => dispatch(unjoinMission(mission.id))}
+                    >
+                      Cancel Reservation
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className="read-more"
+                      onClick={() => window.open(mission.wikipedia)}
+                    >
+                      Read More
+                    </button>
                   </td>
                 </tr>
               ))}
