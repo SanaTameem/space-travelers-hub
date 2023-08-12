@@ -47,7 +47,7 @@ const Mission = () => {
         <div className="column">
           <h3>Status</h3>
           {missions.map((mission) => (
-            <div key={mission.id} className="cell">
+            <div key={mission.mission_id} className="cell">
               {mission.reserved ? (
                 <span className="activeMemberBadge">Active Member</span>
               ) : (
